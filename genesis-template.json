@@ -1,0 +1,75 @@
+{
+  "config": {
+    "chainId": {{chainId}},
+    "homesteadBlock": 0,
+    "eip150Block": 0,
+    "eip150Hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "eip155Block": 0,
+    "eip158Block": 0,
+    "byzantiumBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "w3fs": {
+      "period": 5,
+      "producerDelay": 10,
+      "porepDelay" : 20,
+      "sprint": 64,
+      "backupMultiplier": 4,
+      "validatorContract": "0x0000000000000000000000000000000000001000",
+      "stateReceiverContract": "0x0000000000000000000000000000000000001001"
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x5ce28211",
+  "extraData": "",
+  "gasLimit": "0x989680",
+  "difficulty": "0x1",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "0000000000000000000000000000000000001000": {
+      "balance": "0x0",
+      "code": "0x{{borValidatorSetContract}}"
+    },
+    "0000000000000000000000000000000000001001": {
+      "balance": "0x0",
+      "code": "0x{{stateReceiverContract}}"
+    },
+    "0000000000000000000000000000000000001002": {
+      "balance": "0x0",
+      "code": "0x{{w3fsStorageManager}}"
+    },
+    "0000000000000000000000000000000000001003": {
+      "balance": "0x0",
+      "code": "0x{{w3fsStakeManager}}"
+    },
+    "0000000000000000000000000000000000001004" : {
+      "balance": "0x0",
+      "code": "0x{{systemReward}}"
+    },
+    "0000000000000000000000000000000000001005" : {
+      "balance": "0x0",
+      "code": "0x{{slashingManager}}"
+    },
+    "0000000000000000000000000000000000001006" : {
+      "balance" : "0x0",
+      "code" : "0x{{w3fsStakingInfo}}"
+    },
+    "0000000000000000000000000000000000003002": {
+      "balance": "0x0",
+      "code": "0x{{fileStoreProxyContract}}"
+    },
+    "0000000000000000000000000000000000001010": {
+      "balance": "{{ w3fsChildERC20ContractBalance }}",
+      "code": "0x{{mrc20Contract}}"
+    }{% for v in validators %},
+    "{{ v.address.replace('0x', '') }}": {
+      "balance": "{{ v.balance }}"
+    }{% endfor %}
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
